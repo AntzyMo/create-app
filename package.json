@@ -1,0 +1,39 @@
+{
+  "name": "create-app",
+  "version": "1.0.0",
+  "description": "通过cli创建vue、react模版",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ZhBano/create-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ZhBano/create-app/issues"
+  },
+  "homepage": "https://github.com/ZhBano/create-app#readme",
+  "devDependencies": {
+    "@types/fs-extra": "^9.0.13",
+    "@types/prompts": "^2.0.14",
+    "@typescript-eslint/eslint-plugin": "^5.28.0",
+    "@typescript-eslint/parser": "^5.28.0",
+    "eslint": "^8.0.1",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-n": "^15.0.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "execa": "^6.1.0",
+    "fs-extra": "^10.1.0",
+    "kolorist": "^1.5.1",
+    "minimist": "^1.2.6",
+    "prettier": "^2.7.0",
+    "prompts": "^2.4.2",
+    "typescript": "^4.7.3"
+  }
+}
