@@ -22,7 +22,6 @@ specifiers:
   prettier: ^2.7.0
   prompts: ^2.4.2
   rollup: ^2.75.6
-  rollup-plugin-add-banner: ^1.0.0
   rollup-plugin-delete: ^2.0.0
   rollup-plugin-typescript2: ^0.32.1
   tslib: ^2.4.0
@@ -50,7 +49,6 @@ devDependencies:
   prettier: 2.7.0
   prompts: 2.4.2
   rollup: 2.75.6
-  rollup-plugin-add-banner: 1.0.0_rollup@2.75.6
   rollup-plugin-delete: 2.0.0
   rollup-plugin-typescript2: 0.32.1_fgms252lqu3rk7srzpqqayl4ya
   tslib: 2.4.0
@@ -1704,15 +1702,6 @@ packages:
     hasBin: true
     dependencies:
       glob: 7.2.3
-    dev: true
-
-  /rollup-plugin-add-banner/1.0.0_rollup@2.75.6:
-    resolution: {integrity: sha512-zl/Uk2KQDoY1TURweclDs94M4dDAnerpkUD/QXjO1kCyPQhd6mJBzgWA5NdWNQQE7iddGNLukvEg1RyDJuWUgA==}
-    peerDependencies:
-      rollup: '>= 2.0.0'
-    dependencies:
-      magic-string: 0.25.9
-      rollup: 2.75.6
     dev: true
 
   /rollup-plugin-delete/2.0.0:
