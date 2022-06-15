@@ -1,5 +1,5 @@
 {
-  "name": "react-ant-template",
+  "name": "react-template",
   "private": true,
   "version": "0.0.0",
   "scripts": {
@@ -41,8 +41,5 @@
   "lint-staged": {
     "*.{ts,tsx,jsx}": "eslint --fix",
     "*.{js,css,less,md,ts,tsx}": "prettier --write"
-  },
-  "msw": {
-    "workerDirectory": "public"
   }
 }
