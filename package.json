@@ -16,15 +16,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ZhBano/create-app.git"
+    "url": "git+https://github.com/ZhBano/swift-app.git"
   },
   "keywords": [],
   "author": "Zbano <mozbano@163.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ZhBano/create-app/issues"
+    "url": "https://github.com/ZhBano/swift-app/issues"
   },
-  "homepage": "https://github.com/ZhBano/create-app#readme",
+  "homepage": "https://github.com/ZhBano/swift-app#readme",
   "devDependencies": {
     "@rollup/plugin-commonjs": "^22.0.0",
     "@rollup/plugin-node-resolve": "13.3.0",
