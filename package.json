@@ -1,23 +1,32 @@
 {
-  "name": "create-app",
+  "name": "swift-app",
   "version": "1.0.0",
   "description": "通过cli创建vue、react模版",
-  "main": "index.js",
+  "main": "/dist/index.js",
+  "bin":{
+    "create-app":"dist/index.js"
+  },
+  "files": [
+    "dist",
+    "template"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "pnpm build && npm link",
+    "build": "tsc  --build  "
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ZhBano/create-app.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Zbano <mozbano@163.com>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/ZhBano/create-app/issues"
   },
   "homepage": "https://github.com/ZhBano/create-app#readme",
   "devDependencies": {
+    "@tsconfig/node14": "^1.0.2",
     "@types/fs-extra": "^9.0.13",
     "@types/prompts": "^2.0.14",
     "@typescript-eslint/eslint-plugin": "^5.28.0",
@@ -34,6 +43,7 @@
     "minimist": "^1.2.6",
     "prettier": "^2.7.0",
     "prompts": "^2.4.2",
+    "tslib": "^2.4.0",
     "typescript": "^4.7.3"
   }
 }
