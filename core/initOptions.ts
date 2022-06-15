@@ -60,7 +60,7 @@ const initOptions = async () => {
           throw new Error('取消操作')
         }
       })
-    return { ...result, projectName: defaultProjectName }
+    return { projectName: defaultProjectName, ...result }
   } catch (err:any) {
     console.log(`  ${red('✖ ' + err.message)}`)
     process.exit(1)

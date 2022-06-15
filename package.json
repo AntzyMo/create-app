@@ -12,7 +12,7 @@
   ],
   "scripts": {
     "test": "pnpm build && npm link",
-    "build": "webpack"
+    "build": "rollup --config"
   },
   "repository": {
     "type": "git",
@@ -26,8 +26,11 @@
   },
   "homepage": "https://github.com/ZhBano/create-app#readme",
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^22.0.0",
+    "@rollup/plugin-node-resolve": "13.3.0",
     "@tsconfig/node14": "^1.0.2",
     "@types/fs-extra": "^9.0.13",
+    "@types/minimist": "^1.2.2",
     "@types/prompts": "^2.0.14",
     "@typescript-eslint/eslint-plugin": "^5.28.0",
     "@typescript-eslint/parser": "^5.28.0",
@@ -43,10 +46,11 @@
     "minimist": "^1.2.6",
     "prettier": "^2.7.0",
     "prompts": "^2.4.2",
-    "ts-loader": "^9.3.0",
+    "rollup": "^2.75.6",
+    "rollup-plugin-add-banner": "^1.0.0",
+    "rollup-plugin-delete": "^2.0.0",
+    "rollup-plugin-typescript2": "^0.32.1",
     "tslib": "^2.4.0",
-    "typescript": "^4.7.3",
-    "webpack": "^5.73.0",
-    "webpack-cli": "^4.10.0"
+    "typescript": "^4.7.3"
   }
 }

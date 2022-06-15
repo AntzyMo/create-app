@@ -5,6 +5,7 @@ import { join, resolve, relative } from 'path'
 import { result } from './type'
 
 const cwd = process.cwd()
+
 type template ='typescript-react' |'typescript-vue'
 const templatePath = (...dir:template[]) => resolve(__dirname, '../template', ...dir)
 
