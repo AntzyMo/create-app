@@ -1,25 +1,16 @@
 import { fileURLToPath, URL } from 'url'
 
 import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
 
-import react from '@vitejs/plugin-react'
-
-
+// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [vue()],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   },
-  css: {
-    preprocessorOptions: {
-      less: {
-        javascriptEnabled: true // 支持内联css
-      }
-    }
-  },
-
   build: {
     rollupOptions: {
       output: {
@@ -31,19 +22,17 @@ export default defineConfig({
         //     return id.toString().split('node_modules/')[1].split('/')[0].toString()
         //   }
         // }
+      },
+      external: ['mockjs']
+    },
+
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        //生产环境时移除console
+        drop_console: true,
+        drop_debugger: true
       }
     }
   }
-
-  // server: {
-  //   host: true,
-  //   proxy: {
-  //     "/api": {
-  //       // target:'https://test.jobcn.com', // 测试
-  //       target:'/mock', // 测试
-  //       changeOrigin: true,
-  //       rewrite: (path) => path.replace(/^\/api/, ""),
-  //     },
-  //   },
-  // },
 })

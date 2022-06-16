@@ -46,8 +46,8 @@ const options: PromptObject[] = [
     type: 'select',
     message: '请选择一个预设',
     choices: [
-      // { title: 'vue ()', value: 'vue' },
-      { title: 'react (eslint prettier husky)', value: 'react' }
+      { title: 'vue3 (typescript eslint prettier)', value: 'vue' },
+      { title: 'react (typescript eslint prettier husky)', value: 'react' }
     ]
   }
 ]

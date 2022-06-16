@@ -22,6 +22,9 @@ const execute = (options:result) => {
   if (pickPresets === 'react') {
     copySync(templatePath('typescript-react'), root)
   }
+  if (pickPresets === 'vue') {
+    copySync(templatePath('typescript-vue'), root)
+  }
 
   console.log('\nDone. Now run:\n')
 

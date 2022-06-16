@@ -2923,6 +2923,9 @@ const execute = (options) => {
     if (pickPresets === 'react') {
         lib$1.copySync(templatePath('typescript-react'), root);
     }
+    if (pickPresets === 'vue') {
+        lib$1.copySync(templatePath('typescript-vue'), root);
+    }
     console.log('\nDone. Now run:\n');
     if (root !== cwd) {
         console.log(`  ${bold(green(`cd ${require$$1.relative(cwd, root)}`))}`);
@@ -9484,8 +9487,8 @@ const options = [
         type: 'select',
         message: '请选择一个预设',
         choices: [
-            // { title: 'vue ()', value: 'vue' },
-            { title: 'react (eslint prettier husky)', value: 'react' }
+            { title: 'vue3 (typescript eslint prettier)', value: 'vue' },
+            { title: 'react (typescript eslint prettier husky)', value: 'react' }
         ]
     }
 ];
