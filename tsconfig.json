@@ -6,5 +6,5 @@
   },
   "files": ["./core/index.ts"],
   "include": ["/core"],
-  "exclude": ["node_modules","dist","template"]
+  "exclude": ["node_modules","dist","template"],
 }

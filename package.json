@@ -11,7 +11,7 @@
     "template"
   ],
   "scripts": {
-    "test": "pnpm build && npm link",
+    "test": "pnpm dist/index.js",
     "build": "rollup --config"
   },
   "repository": {
@@ -40,7 +40,6 @@
     "eslint-plugin-n": "^15.0.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-promise": "^6.0.0",
-    "execa": "^6.1.0",
     "fs-extra": "^10.1.0",
     "kolorist": "^1.5.1",
     "minimist": "^1.2.6",

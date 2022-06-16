@@ -2928,14 +2928,6 @@ const execute = (options) => {
         console.log(`  ${bold(green(`cd ${require$$1.relative(cwd, root)}`))}`);
     }
     console.log(`  ${bold(green('pnpm install'))}\n\n`);
-    // exec('pnpm i', {
-    //   cwd: root
-    // }, (err, studo) => {
-    //   if (err) {
-    //     console.log(err)
-    //   }
-    //   console.log(studo, 'studo')
-    // })
 };
 
 var prompts$2 = {};
@@ -9492,7 +9484,7 @@ const options = [
         type: 'select',
         message: '请选择一个预设',
         choices: [
-            { title: 'vue ()', value: 'vue' },
+            // { title: 'vue ()', value: 'vue' },
             { title: 'react (eslint prettier husky)', value: 'react' }
         ]
     }

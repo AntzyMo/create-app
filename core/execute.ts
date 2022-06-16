@@ -29,14 +29,6 @@ const execute = (options:result) => {
     console.log(`  ${bold(green(`cd ${relative(cwd, root)}`))}`)
   }
   console.log(`  ${bold(green('pnpm install'))}\n\n`)
-  // exec('pnpm i', {
-  //   cwd: root
-  // }, (err, studo) => {
-  //   if (err) {
-  //     console.log(err)
-  //   }
-  //   console.log(studo, 'studo')
-  // })
 }
 
 export default execute
