@@ -1,6 +1,6 @@
 {
   "name": "swift-app",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "通过cli创建vue、react模版",
   "main": "/dist/index.js",
   "bin": {
