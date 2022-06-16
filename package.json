@@ -11,7 +11,7 @@
     "template"
   ],
   "scripts": {
-    "test": "pnpm dist/index.js",
+    "test": "node dist/index.js",
     "build": "rollup --config"
   },
   "repository": {
