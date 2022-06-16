@@ -1,6 +1,6 @@
 {
   "name": "swift-app",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "通过cli创建自定义模版",
   "main": "/dist/index.js",
   "bin": {
