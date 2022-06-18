@@ -9507,7 +9507,6 @@ const initOptions = async () => {
     }
 };
 
-// #!/usr/bin/env node
 const init = async () => {
     const result = await initOptions();
     if (result) {

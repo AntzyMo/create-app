@@ -63,7 +63,7 @@ const initOptions = async () => {
     return { projectName: defaultProjectName, ...result }
   } catch (err:any) {
     console.log(`  ${red('✖ ' + err.message)}`)
-    process.exit(1)
+    process.exit(1) //  退出进程 1 代表失败
   }
 }
 

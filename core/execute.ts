@@ -4,7 +4,7 @@ import { removeSync, ensureDirSync, copySync } from 'fs-extra'
 import { join, resolve, relative } from 'path'
 import { result } from './type'
 
-const cwd = process.cwd()
+const cwd = process.cwd() // 获取node进程的当前工作目录
 
 type template ='typescript-react' |'typescript-vue'
 const templatePath = (...dir:template[]) => resolve(__dirname, '../template', ...dir)
