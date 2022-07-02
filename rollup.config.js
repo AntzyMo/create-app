@@ -5,6 +5,7 @@ import del from 'rollup-plugin-delete'
 
 export default {
   input: 'core/index.ts',
+  preserveEntrySignatures: false,
   output: {
     dir: 'dist',
     format: 'cjs',
