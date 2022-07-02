@@ -2,11 +2,9 @@
 import execute from './execute'
 import initOptions from './initOptions'
 
-const init = async () => {
+(async function () {
   const result = await initOptions()
   if (result) {
     execute(result)
   }
-}
-
-init()
+})()
