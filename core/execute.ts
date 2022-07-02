@@ -1,8 +1,8 @@
 
-import { green, bold } from 'kolorist'
 import { removeSync, ensureDirSync, copySync } from 'fs-extra'
-import { join, resolve, relative } from 'path'
+import { join, resolve } from 'path'
 import { result } from './type'
+import { chalk, $, cd } from 'zx'
 
 const cwd = process.cwd() // 获取node进程的当前工作目录
 
@@ -26,12 +26,19 @@ const execute = (options:result) => {
     copySync(templatePath('typescript-vue'), root)
   }
 
-  console.log('\nDone. Now run:\n')
+  hadnleProcess(root)
+}
 
-  if (root !== cwd) {
-    console.log(`  ${bold(green(`cd ${relative(cwd, root)}`))}`)
-  }
-  console.log(`  ${bold(green('pnpm install'))}\n\n`)
+const hadnleProcess = async (root:string) => {
+  const projectName = root.split('/').at(-1)
+
+  $.verbose = false
+  await cd(`/${root}`)
+  await $`git init`
+  console.log(`\n\n ${chalk.greenBright(`进入啦${projectName}目录，正在安装依赖，请稍等...`)}\n\n`)
+
+  await $`pnpm i`
+  console.log(` ${chalk.greenBright('依赖安装完啦')}\n`)
 }
 
 export default execute
