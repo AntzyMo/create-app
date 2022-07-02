@@ -1,6 +1,6 @@
 {
   "name": "@antzy/create-app",
-  "version": "0.0.1",
+  "version": "1.0.4",
   "description": "通过cli创建自定义模版",
   "main": "/dist/index.js",
   "bin": {

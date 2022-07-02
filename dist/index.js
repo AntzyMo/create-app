@@ -3099,7 +3099,7 @@ const ansiStyles = assembleStyles();
 
 // const isBlinkBasedBrowser = /\b(Chrome|Chromium)\//.test(navigator.userAgent);
 
-const colorSupport =  false;
+const colorSupport = false
 
 const supportsColor = {
 	stdout: colorSupport,
@@ -17879,7 +17879,7 @@ class Body {
 			return formData;
 		}
 
-		const {toFormData} = await Promise.resolve().then(function () { return require('./multipart-parser-daf5efcb.js'); });
+		const {toFormData} = await Promise.resolve().then(function () { return require('./multipart-parser-b5349a9c.js'); });
 		return toFormData(this.body, ct);
 	}
 
@@ -20117,70 +20117,6 @@ Object.assign(function globby$1(patterns, options) {
     return globby(patterns, options);
 }, globbyModule);
 
-let enabled = true;
-// Support both browser and node environments
-const globalVar = typeof self !== 'undefined'
-    ? self
-    : typeof window !== 'undefined'
-        ? window
-        : typeof global !== 'undefined'
-            ? global
-            : {};
-/**
- * Detect how much colors the current terminal supports
- */
-let supportLevel = 0 /* none */;
-if (globalVar.process && globalVar.process.env && globalVar.process.stdout) {
-    const { FORCE_COLOR, NODE_DISABLE_COLORS, TERM } = globalVar.process.env;
-    if (NODE_DISABLE_COLORS || FORCE_COLOR === '0') {
-        enabled = false;
-    }
-    else if (FORCE_COLOR === '1') {
-        enabled = true;
-    }
-    else if (TERM === 'dumb') {
-        enabled = false;
-    }
-    else if ('CI' in globalVar.process.env &&
-        [
-            'TRAVIS',
-            'CIRCLECI',
-            'APPVEYOR',
-            'GITLAB_CI',
-            'GITHUB_ACTIONS',
-            'BUILDKITE',
-            'DRONE',
-        ].some(vendor => vendor in globalVar.process.env)) {
-        enabled = true;
-    }
-    else {
-        enabled = process.stdout.isTTY;
-    }
-    if (enabled) {
-        supportLevel =
-            TERM && TERM.endsWith('-256color')
-                ? 2 /* ansi256 */
-                : 1 /* ansi */;
-    }
-}
-let options$1 = {
-    enabled,
-    supportLevel,
-};
-function kolorist(start, end, level = 1 /* ansi */) {
-    const open = `\x1b[${start}m`;
-    const close = `\x1b[${end}m`;
-    const regex = new RegExp(`\\x1b\\[${end}m`, 'g');
-    return (str) => {
-        return options$1.enabled && options$1.supportLevel >= level
-            ? open + ('' + str).replace(regex, open) + close
-            : '' + str;
-    };
-}
-const bold = kolorist(1, 22);
-const red = kolorist(31, 39);
-const green = kolorist(32, 39);
-
 const cwd = process.cwd(); // 获取node进程的当前工作目录
 const templatePath = (...dir) => require$$0$4.resolve(__dirname, '../template', ...dir);
 const execute = (options) => {
@@ -20205,9 +20141,9 @@ const hadnleProcess = async (root) => {
     $.verbose = false;
     await cd(`/${root}`);
     await $ `git init`;
-    console.log(`  ${bold(green(`进入啦${projectName}目录，正在安装依赖，请稍等...`))}\n\n`);
+    console.log(`\n\n ${chalk.greenBright(`进入${projectName}目录啦，正在安装依赖，请稍等...`)}\n\n`);
     await $ `pnpm i`;
-    console.log(`  ${bold(green('依赖安装完啦'))}\n`);
+    console.log(` ${chalk.greenBright('依赖安装完啦')}\n`);
 };
 
 var prompts$2 = {};
@@ -26504,7 +26440,7 @@ const options = [
         type: (prev, values) => {
             const { shouldOverwrite } = values;
             if (shouldOverwrite && !shouldOverwrite) {
-                console.log(`  ${red('✖ 取消操作')}`);
+                console.log(`  ${chalk.red('✖ 取消操作')}`);
             }
             return null;
         }
@@ -26529,7 +26465,7 @@ const initOptions = async () => {
         return { projectName: defaultProjectName, ...result };
     }
     catch (err) {
-        console.log(`  ${red('✖ ' + err.message)}`);
+        console.log(`  ${chalk.red('✖ ' + err.message)}`);
         process.exit(1); //  退出进程 1 代表失败
     }
 };

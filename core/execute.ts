@@ -2,8 +2,7 @@
 import { removeSync, ensureDirSync, copySync } from 'fs-extra'
 import { join, resolve } from 'path'
 import { result } from './type'
-import { $, cd } from 'zx'
-import { bold, green } from 'kolorist'
+import { chalk, $, cd } from 'zx'
 
 const cwd = process.cwd() // 获取node进程的当前工作目录
 
@@ -36,9 +35,10 @@ const hadnleProcess = async (root:string) => {
   $.verbose = false
   await cd(`/${root}`)
   await $`git init`
-  console.log(`  ${bold(green(`进入啦${projectName}目录，正在安装依赖，请稍等...`))}\n\n`)
+  console.log(`\n\n ${chalk.greenBright(`进入${projectName}目录啦，正在安装依赖，请稍等...`)}\n\n`)
+
   await $`pnpm i`
-  console.log(`  ${bold(green('依赖安装完啦'))}\n`)
+  console.log(` ${chalk.greenBright('依赖安装完啦')}\n`)
 }
 
 export default execute
