@@ -4,7 +4,7 @@ import minimist from 'minimist'
 import { existsSync, readdirSync } from 'fs'
 
 import type { PromptObject } from 'prompts'
-import { result } from './type'
+import type { result } from './type'
 
 const argv = minimist(process.argv.slice(2))
 const targetDir = argv._[0]
@@ -33,7 +33,7 @@ const options: PromptObject[] = [
   },
   {
     name: 'checkStep',
-    type: (prev, values) => {
+    type: (_prev, values) => {
       const { shouldOverwrite } = values
       if (shouldOverwrite && !shouldOverwrite) {
         console.log(`  ${red('✖ 取消操作')}`)

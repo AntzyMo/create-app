@@ -1,11 +1,11 @@
 
 import { green, bold } from 'kolorist'
 import { removeSync, ensureDirSync, copySync } from 'fs-extra'
-import { join } from 'path'
+import { join, sep } from 'path'
 import { fileURLToPath, URL } from 'url'
 
-import { result } from './type'
-import { execaSync } from 'execa'
+import type { result } from './type'
+import { execaCommandSync } from 'execa'
 import { chdir } from 'process'
 
 const cwd = process.cwd() // 获取node进程的当前工作目录
@@ -34,18 +34,21 @@ const execute = (options:result) => {
 }
 
 const handleProcess = async (root:string) => {
-  const projectName = root.split('/').at(-1)
+  const projectName = root.split(sep).at(-1)
+  // TODO
+  // const prefixSep = (command:string) => `${sep}${command}`
 
   await cd(root)
-  execaSync('git init')
+  execaCommandSync('git init')
   console.log(`\n\n  ${bold(green(`进入${projectName}目录啦，正在安装依赖，请稍等...`))}\n\n`)
 
-  execaSync('pnpm i', { stdout: 'inherit' })
+  execaCommandSync('pnpm i', { stdout: 'inherit' })
 }
 
 const cd = async (path:string) => {
   try {
     await chdir(path)
+    console.log(`New directory: ${process.cwd()}`)
   } catch (err) {
     console.log(err, 'cderr')
   }
