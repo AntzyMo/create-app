@@ -2,9 +2,9 @@
   "extends": "@tsconfig/node14/tsconfig.json",
   "compilerOptions": {
     "outDir": "dist",
-    "module": "ES2015"
+    "module": "ESNext"
   },
-  "files": ["./core/index.ts"],
-  "include": ["/core"],
+  "files": ["src/index.ts"],
+  "include": ["/src"],
   "exclude": ["node_modules","dist","template"],
 }

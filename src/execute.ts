@@ -1,13 +1,17 @@
 
+import { green, bold } from 'kolorist'
 import { removeSync, ensureDirSync, copySync } from 'fs-extra'
-import { join, resolve } from 'path'
+import { join } from 'path'
+import { fileURLToPath, URL } from 'url'
+
 import { result } from './type'
-import { chalk, $, cd } from 'zx'
+import { execaSync } from 'execa'
+import { chdir } from 'process'
 
 const cwd = process.cwd() // 获取node进程的当前工作目录
 
 type template ='typescript-react' |'typescript-vue'
-const templatePath = (...dir:template[]) => resolve(__dirname, '../template', ...dir)
+const templatePath = (...dir:template[]) => fileURLToPath(new URL(`../template/${dir}`, import.meta.url))
 
 const execute = (options:result) => {
   const { projectName, pickPresets, hasProjectDir } = options
@@ -32,13 +36,19 @@ const execute = (options:result) => {
 const hadnleProcess = async (root:string) => {
   const projectName = root.split('/').at(-1)
 
-  $.verbose = false
-  await cd(`/${root}`)
-  await $`git init`
-  console.log(`\n\n ${chalk.greenBright(`进入${projectName}目录啦，正在安装依赖，请稍等...`)}\n\n`)
+  await cd(root)
+  execaSync('git init')
+  console.log(`\n\n  ${bold(green(`进入${projectName}目录啦，正在安装依赖，请稍等...`))}\n\n`)
 
-  await $`pnpm i`
-  console.log(` ${chalk.greenBright('依赖安装完啦')}\n`)
+  execaSync('pnpm i', { stdout: 'inherit' })
+}
+
+const cd = async (path:string) => {
+  try {
+    await chdir(path)
+  } catch (err) {
+    console.log(err, 'cderr')
+  }
 }
 
 export default execute

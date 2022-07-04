@@ -4,11 +4,11 @@ import { nodeResolve } from '@rollup/plugin-node-resolve'
 import del from 'rollup-plugin-delete'
 
 export default {
-  input: 'core/index.ts',
+  input: 'src/index.ts',
   preserveEntrySignatures: false,
   output: {
     dir: 'dist',
-    format: 'cjs',
+    format: 'esm',
     banner: '#!/usr/bin/env node'
   },
   plugins: [

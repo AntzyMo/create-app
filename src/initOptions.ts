@@ -1,5 +1,5 @@
 import prompts from 'prompts'
-import { chalk } from 'zx'
+import { red } from 'kolorist'
 import minimist from 'minimist'
 import { existsSync, readdirSync } from 'fs'
 
@@ -36,7 +36,7 @@ const options: PromptObject[] = [
     type: (prev, values) => {
       const { shouldOverwrite } = values
       if (shouldOverwrite && !shouldOverwrite) {
-        console.log(`  ${chalk.red('✖ 取消操作')}`)
+        console.log(`  ${red('✖ 取消操作')}`)
       }
       return null
     }
@@ -62,7 +62,7 @@ const initOptions = async () => {
       })
     return { projectName: defaultProjectName, ...result }
   } catch (err:any) {
-    console.log(`  ${chalk.red('✖ ' + err.message)}`)
+    console.log(`  ${red('✖ ' + err.message)}`)
     process.exit(1) //  退出进程 1 代表失败
   }
 }
