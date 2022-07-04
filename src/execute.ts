@@ -30,10 +30,10 @@ const execute = (options:result) => {
     copySync(templatePath('typescript-vue'), root)
   }
 
-  hadnleProcess(root)
+  handleProcess(root)
 }
 
-const hadnleProcess = async (root:string) => {
+const handleProcess = async (root:string) => {
   const projectName = root.split('/').at(-1)
 
   await cd(root)
