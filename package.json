@@ -13,7 +13,8 @@
   ],
   "scripts": {
     "test": "node dist/index.js",
-    "build": "rollup --config"
+    "build": "rollup --config",
+    "release": "bumpp package.json  --commit --push --tag "
   },
   "repository": {
     "type": "git",
@@ -40,6 +41,7 @@
     "@types/prompts": "^2.0.14",
     "@typescript-eslint/eslint-plugin": "^5.28.0",
     "@typescript-eslint/parser": "^5.28.0",
+    "bumpp": "^8.2.1",
     "eslint": "^8.19.0",
     "fs-extra": "^10.1.0",
     "minimist": "^1.2.6",
