@@ -1,10 +1,9 @@
 
 import execute from './execute'
 import initOptions from './initOptions'
+import './command'
 
-(async function () {
-  const result = await initOptions()
-  if (result) {
-    execute(result)
-  }
-})()
+const result = await initOptions()
+if (result) {
+  execute(result)
+}
