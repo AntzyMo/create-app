@@ -1,19 +1,19 @@
 
-import { green, bold } from 'kolorist'
-import { removeSync, ensureDirSync, copySync } from 'fs-extra'
+import { execaCommandSync } from 'execa'
+import { copySync, ensureDirSync, removeSync } from 'fs-extra'
+import { bold, green } from 'kolorist'
 import { join, sep } from 'path'
+import { chdir } from 'process'
 import { fileURLToPath, URL } from 'url'
 
 import type { result } from './type'
-import { execaCommandSync } from 'execa'
-import { chdir } from 'process'
 
 const cwd = process.cwd() // 获取node进程的当前工作目录
 
-type template ='typescript-react' |'typescript-vue'
-const templatePath = (...dir:template[]) => fileURLToPath(new URL(`../template/${dir}`, import.meta.url))
+type template = 'typescript-react' | 'typescript-vue'
+const templatePath = (...dir: template[]) => fileURLToPath(new URL(`../template/${dir}`, import.meta.url))
 
-const execute = (options:result) => {
+const execute = (options: result) => {
   const { projectName, pickPresets, hasProjectDir } = options
   const root = join(cwd, projectName!)
 
@@ -30,13 +30,19 @@ const execute = (options:result) => {
     copySync(templatePath('typescript-vue'), root)
   }
 
+  if (pickPresets === 'pkg') {
+    copySync(templatePath('pkg'), root)
+  }
+
   handleProcess(root)
 }
 
-const handleProcess = async (root:string) => {
+const handleProcess = async (root: string) => {
   const projectName = root.split(sep).at(-1)
-  // TODO
-  // const prefixSep = (command:string) => `${sep}${command}`
+  /*
+   * TODO
+   * const prefixSep = (command:string) => `${sep}${command}`
+   */
 
   await cd(root)
   execaCommandSync('git init')
@@ -45,7 +51,7 @@ const handleProcess = async (root:string) => {
   execaCommandSync('pnpm i', { stdout: 'inherit' })
 }
 
-const cd = async (path:string) => {
+const cd = async (path: string) => {
   try {
     await chdir(path)
     console.log(`New directory: ${process.cwd()}`)

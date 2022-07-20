@@ -1,9 +1,9 @@
-import prompts from 'prompts'
+import { existsSync, readdirSync } from 'fs'
 import { red } from 'kolorist'
 import minimist from 'minimist'
-import { existsSync, readdirSync } from 'fs'
-
 import type { PromptObject } from 'prompts'
+import prompts from 'prompts'
+
 import type { result } from './type'
 
 const argv = minimist(process.argv.slice(2))
@@ -46,22 +46,37 @@ const options: PromptObject[] = [
     type: 'select',
     message: '请选择一个预设',
     choices: [
-      { title: 'vue3 (typescript eslint prettier)', value: 'vue' },
-      { title: 'react (typescript eslint prettier husky)', value: 'react' }
+      {
+        title: 'vue3 (typescript eslint prettier)',
+        value: 'vue'
+      },
+      {
+        title: 'react (typescript eslint prettier husky)',
+        value: 'react'
+      },
+      {
+        title: 'pkg',
+        value: 'pkg'
+      }
     ]
   }
 ]
 
 const initOptions = async () => {
   try {
-    const result:result = await prompts(options,
+    const result:result = await prompts(
+      options,
       {
         onCancel: () => {
           throw new Error('取消操作')
         }
-      })
-    return { projectName: defaultProjectName, ...result }
-  } catch (err:any) {
+      }
+    )
+    return {
+      projectName: defaultProjectName,
+      ...result
+    }
+  } catch (err: any) {
     console.log(`  ${red('✖ ' + err.message)}`)
     process.exit(1) //  退出进程 1 代表失败
   }
