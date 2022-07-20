@@ -10,8 +10,7 @@ import type { result } from './type'
 
 const cwd = process.cwd() // 获取node进程的当前工作目录
 
-type template = 'pkg' | 'typescript-react' | 'typescript-vue'
-const templatePath = (...dir: template[]) => fileURLToPath(new URL(`../template/${dir}`, import.meta.url))
+const templatePath = (...dir: string[]) => fileURLToPath(new URL(`../template/${dir}`, import.meta.url))
 
 const execute = (options: result) => {
   const { projectName, pickPresets, hasProjectDir } = options
@@ -23,17 +22,7 @@ const execute = (options: result) => {
     ensureDirSync(root)
   }
 
-  if (pickPresets === 'react') {
-    copySync(templatePath('typescript-react'), root)
-  }
-  if (pickPresets === 'vue') {
-    copySync(templatePath('typescript-vue'), root)
-  }
-
-  if (pickPresets === 'pkg') {
-    copySync(templatePath('pkg'), root)
-  }
-
+  copySync(templatePath(pickPresets!), root)
   handleProcess(root)
 }
 

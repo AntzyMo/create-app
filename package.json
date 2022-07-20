@@ -15,8 +15,7 @@
     "test": "node dist/index.js",
     "build": "rollup --config",
     "lint": "eslint ./src --fix",
-    "release": "bumpp package.json  --commit --push --tag ",
-    "prepare": "husky install"
+    "release": "bumpp package.json  --commit --push --tag "
   },
   "repository": {
     "type": "git",
@@ -47,7 +46,6 @@
     "bumpp": "^8.2.1",
     "eslint": "^8.20.0",
     "fs-extra": "^10.1.0",
-    "husky": "^8.0.1",
     "minimist": "^1.2.6",
     "prompts": "^2.4.2",
     "rollup": "^2.77.0",
@@ -60,8 +58,5 @@
     "commander": "^9.4.0",
     "execa": "^6.1.0",
     "kolorist": "^1.5.1"
-  },
-  "lint-staged": {
-    "./src/*.ts": "eslint --fix"
   }
 }

@@ -4,7 +4,7 @@ import minimist from 'minimist'
 import type { PromptObject } from 'prompts'
 import prompts from 'prompts'
 
-import type { result } from './type'
+import type { presets, result } from './type'
 
 const argv = minimist(process.argv.slice(2))
 const targetDir = argv._[0]
@@ -15,71 +15,58 @@ const hasProjectDir = (dir: string) => {
   return existsSync(dir) && !!readdirSync(dir).length
 }
 
-const options: PromptObject[] = [
-  {
-    name: 'projectName',
-    type: targetDir ? null : 'text',
-    message: 'Project Name:',
-    initial: defaultProjectName
-
-  },
-  {
-    name: 'hasProjectDir',
-    type: () => (hasProjectDir(defaultProjectName) ? 'toggle' : null),
-    message: 'Now Current directory has files. Do you wanting Remove existing files and continue?',
-    initial: true,
-    active: 'yes',
-    inactive: 'no'
-  },
-  {
-    name: 'checkStep',
-    type: (_prev, values) => {
-      const { shouldOverwrite } = values
-      if (shouldOverwrite && !shouldOverwrite) {
-        console.log(`  ${red('✖ 取消操作')}`)
-      }
-      return null
-    }
-  },
-  {
-    name: 'pickPresets',
-    type: 'select',
-    message: '请选择一个预设',
-    choices: [
-      {
-        title: 'vue3 (typescript eslint prettier)',
-        value: 'vue'
-      },
-      {
-        title: 'react (typescript eslint prettier husky)',
-        value: 'react'
-      },
-      {
-        title: 'pkg',
-        value: 'pkg'
-      }
-    ]
-  }
-]
-
-const initOptions = async () => {
-  try {
-    const result: result = await prompts(
-      options,
-      {
-        onCancel: () => {
-          throw new Error('取消操作')
+const optionsMap = (presetsMap: presets[]) => {
+  const optMap: PromptObject[] = [
+    {
+      name: 'projectName',
+      type: targetDir ? null : 'text',
+      message: 'Project Name:',
+      initial: defaultProjectName
+    },
+    {
+      name: 'hasProjectDir',
+      type: () => (hasProjectDir(defaultProjectName) ? 'toggle' : null),
+      message:
+        'Now Current directory has files. Do you wanting Remove existing files and continue?',
+      initial: true,
+      active: 'yes',
+      inactive: 'no'
+    },
+    {
+      name: 'checkStep',
+      type: (_prev, values) => {
+        const { shouldOverwrite } = values
+        if (shouldOverwrite && !shouldOverwrite) {
+          console.log(`  ${red('✖ 取消操作')}`)
         }
+        return null
       }
-    )
+    },
+    {
+      name: 'pickPresets',
+      type: 'select',
+      message: '请选择一个预设',
+      choices: presetsMap
+    }
+  ]
+  return optMap
+}
+
+const initialOptions = async (presetsMap: presets[]) => {
+  try {
+    const result: result = await prompts(optionsMap(presetsMap), {
+      onCancel: () => {
+        throw new Error('取消操作')
+      }
+    })
     return {
       projectName: defaultProjectName,
       ...result
     }
-  } catch (err: any) {
+  } catch (err) {
     console.log(`  ${red(`✖ ${err.message}`)}`)
     process.exit(1) //  退出进程 1 代表失败
   }
 }
 
-export default initOptions
+export default initialOptions

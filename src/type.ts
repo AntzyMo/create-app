@@ -3,3 +3,8 @@ export interface result {
   hasProjectDir?: boolean
   pickPresets?: string
 }
+
+export interface presets {
+  title: string
+  value: string
+}

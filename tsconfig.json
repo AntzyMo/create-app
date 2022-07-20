@@ -3,7 +3,8 @@
   "compilerOptions": {
     "outDir": "dist",
     "module": "ESNext",
-    "resolveJsonModule":true
+    "resolveJsonModule":true,
+    "useUnknownInCatchVariables":false
   },
   "files": ["src/index.ts"],
   "include": ["/src"],
