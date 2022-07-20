@@ -14,6 +14,7 @@
   "scripts": {
     "test": "node dist/index.js",
     "build": "rollup --config",
+    "lint": "eslint ./src --fix",
     "release": "bumpp package.json  --commit --push --tag ",
     "prepare": "husky install"
   },
