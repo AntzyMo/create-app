@@ -10,7 +10,7 @@ import type { result } from './type'
 
 const cwd = process.cwd() // 获取node进程的当前工作目录
 
-type template = 'typescript-react' | 'typescript-vue'
+type template = 'pkg' | 'typescript-react' | 'typescript-vue'
 const templatePath = (...dir: template[]) => fileURLToPath(new URL(`../template/${dir}`, import.meta.url))
 
 const execute = (options: result) => {
