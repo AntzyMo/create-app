@@ -61,6 +61,6 @@
     "kolorist": "^1.5.1"
   },
   "lint-staged": {
-    "./src/*.{vue,js,jsx,cjs,mjs}": "eslint --fix"
+    "./src/*.{ts}": "eslint --fix"
   }
 }

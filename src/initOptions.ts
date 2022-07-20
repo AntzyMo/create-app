@@ -64,7 +64,7 @@ const options: PromptObject[] = [
 
 const initOptions = async () => {
   try {
-    const result:result = await prompts(
+    const result: result = await prompts(
       options,
       {
         onCancel: () => {
@@ -77,7 +77,7 @@ const initOptions = async () => {
       ...result
     }
   } catch (err: any) {
-    console.log(`  ${red('✖ ' + err.message)}`)
+    console.log(`  ${red(`✖ ${err.message}`)}`)
     process.exit(1) //  退出进程 1 代表失败
   }
 }
