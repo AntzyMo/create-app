@@ -2,51 +2,48 @@
 import { execaCommandSync } from 'execa'
 import { copySync, ensureDirSync, removeSync } from 'fs-extra'
 import { bold, green } from 'kolorist'
-import { join, sep } from 'path'
-import { chdir } from 'process'
+import { join } from 'path'
 import { fileURLToPath, URL } from 'url'
 
 import type { result } from './type'
+import { cd } from './utils'
 
-const cwd = process.cwd() // 获取node进程的当前工作目录
-
+/**
+ * 获取模版文件夹所在点位置
+ * @param dir
+ * @returns
+ */
 const templatePath = (...dir: string[]) => fileURLToPath(new URL(`../template/${dir}`, import.meta.url))
 
-const execute = (options: result) => {
-  const { projectName, pickPresets, hasProjectDir } = options
-  const root = join(cwd, projectName!)
+const useTemplate = async (options: result) => {
+  const { projectName, pickPresets, sameProjectDir } = options
 
-  if (hasProjectDir) {
-    removeSync(root)
+  // 获取node进程的当前工作目录
+  const cwd = process.cwd()
+  const currentDir = join(cwd, projectName!)
+
+  // 处理已经有一个相同的文件夹
+  if (sameProjectDir) {
+    removeSync(currentDir)
   } else {
-    ensureDirSync(root)
+    ensureDirSync(currentDir)
   }
+  copySync(templatePath(pickPresets!), currentDir)
 
-  copySync(templatePath(pickPresets!), root)
-  handleProcess(root)
-}
-
-const handleProcess = async (root: string) => {
-  const projectName = root.split(sep).at(-1)
-  /*
-   * TODO
-   * const prefixSep = (command:string) => `${sep}${command}`
-   */
-
-  await cd(root)
+  await cd(currentDir)
   execaCommandSync('git init')
   console.log(`\n\n  ${bold(green(`进入${projectName}目录啦，正在安装依赖，请稍等...`))}\n\n`)
 
   execaCommandSync('pnpm i', { stdout: 'inherit' })
 }
 
-const cd = async (path: string) => {
-  try {
-    await chdir(path)
-    console.log(`New directory: ${process.cwd()}`)
-  } catch (err) {
-    console.log(err, 'cderr')
+export default (options: result) => {
+  const { pickPresets } = options
+
+  if (pickPresets?.includes('npm')) {
+    execaCommandSync('npm init vue@latest', { stdout: 'inherit' })
+  } else {
+    useTemplate(options)
   }
 }
 
-export default execute

@@ -1,6 +1,6 @@
 export interface result {
   projectName?: string
-  hasProjectDir?: boolean
+  sameProjectDir?: boolean
   pickPresets?: string
 }
 
