@@ -13,7 +13,7 @@ export default {
     banner: '#!/usr/bin/env node'
   },
   plugins: [
-    typescript(),
+    typescript({ check: false }),
     commonjs(),
     nodeResolve({ preferBuiltins: true }),
     del({ targets: 'dist/*' }),
