@@ -1,12 +1,10 @@
 {
-  "extends": "@tsconfig/node16-strictest-esm/tsconfig.json",
   "compilerOptions": {
-    "outDir": "dist",
-    "module": "ESNext",
-    "resolveJsonModule":true,
-    "useUnknownInCatchVariables":false
+    "target": "ESNext",
+    "module": "CommonJS",
+    "resolveJsonModule": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true
   },
-  "files": ["src/index.ts"],
-  "include": ["/src"],
-  "exclude": ["node_modules","dist","template"],
+  "exclude": ["node_modules","template"],
 }

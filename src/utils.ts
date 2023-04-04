@@ -1,11 +1,12 @@
-import { existsSync, readdirSync } from 'fs'
-import { chdir } from 'process'
+import { chdir } from 'node:process'
+import { existsSync, readdirSync } from 'node:fs'
+
 import type { PromptType } from 'prompts'
 
 export const cd = async (path: string) => {
   try {
     await chdir(path)
-    console.log(`New directory: ${process.cwd()}`)
+    console.log(`New directory: ${path}`)
   } catch (err) {
     console.log(err, 'cderr')
   }

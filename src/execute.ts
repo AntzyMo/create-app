@@ -1,19 +1,21 @@
 
-import { execaCommandSync } from 'execa'
+import { join } from 'node:path'
 import { copySync, ensureDirSync, removeSync } from 'fs-extra'
-import { bold, green } from 'kolorist'
-import { join } from 'path'
-import { fileURLToPath, URL } from 'url'
 
-import type { result } from './type'
 import { cd } from './utils'
+import type { result } from './type'
+
+let execaCommandSync = null
+import('execa').then(execa => {
+  execaCommandSync = execa.execaCommandSync
+})
 
 /**
  * 获取模版文件夹所在点位置
  * @param dir
  * @returns
  */
-const templatePath = (...dir: string[]) => fileURLToPath(new URL(`../template/${dir}`, import.meta.url))
+const templatePath = (...dir: string[]) => join(__dirname, '../template', ...dir)
 
 const useTemplate = async (options: result) => {
   const { projectName, pickPresets, sameProjectDir } = options
@@ -31,9 +33,6 @@ const useTemplate = async (options: result) => {
   copySync(templatePath(pickPresets!), currentDir)
 
   await cd(currentDir)
-  execaCommandSync('git init')
-  console.log(`\n\n  ${bold(green(`进入${projectName}目录啦，正在安装依赖，请稍等...`))}\n\n`)
-
   execaCommandSync('pnpm i', { stdout: 'inherit' })
 }
 

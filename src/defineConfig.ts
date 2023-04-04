@@ -1,10 +1,11 @@
+import prompts from 'prompts'
 import { red } from 'kolorist'
 import minimist from 'minimist'
+
 import type { PromptObject } from 'prompts'
-import prompts from 'prompts'
+import type { presets, result } from './type'
 
 import execute from './execute'
-import type { presets, result } from './type'
 import { hasDirName, isUseNPM } from './utils'
 const argv = minimist(process.argv.slice(2))
 
@@ -13,7 +14,7 @@ const defaultProjectName = firstArgv || 'create-app'
 
 interface defineConfig {
   presets: presets[]
- }
+}
 
 const createQuestions = (questionMap: defineConfig) => {
   const { presets } = questionMap
