@@ -11,6 +11,6 @@ npm i @antzy/create-app -g
 ```
 create-app project-name
 ```
-
-
+## License
+[MIT](./LICENSE) License &copy; 2022-PRESENT [AntzyMo](https://github.com/AntzyMo)
 
