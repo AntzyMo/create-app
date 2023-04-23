@@ -6,11 +6,10 @@ import type { PromptObject } from 'prompts'
 import type { presets, result } from './type'
 
 import execute from './execute'
-import { hasDirName, isUseNPM } from './utils'
-const argv = minimist(process.argv.slice(2))
+import { hasDirName } from './utils'
+const { _, git } = minimist(process.argv.slice(2))
 
-const firstArgv = argv._[0]
-const defaultProjectName = firstArgv || 'create-app'
+const defaultProjectName = _[0]
 
 interface defineConfig {
   presets: presets[]
@@ -27,15 +26,15 @@ const createQuestions = (questionMap: defineConfig) => {
     },
     {
       name: 'projectName',
-      type: prev => isUseNPM(prev, 'text'),
+      type: (git || defaultProjectName) ? null : 'text',
       message: 'Project Name:',
-      initial: defaultProjectName
+      initial: 'create-app'
     },
     {
       name: 'sameProjectDir',
       type: () => hasDirName(defaultProjectName),
       message:
-        'Now Current directory has files. Do you wanting Remove existing files and continue?',
+        '现在当前目录有文件。 是否要删除现有文件并继续?',
       initial: true,
       active: 'yes',
       inactive: 'no'
@@ -47,5 +46,10 @@ const createQuestions = (questionMap: defineConfig) => {
 export default async (options: defineConfig) => {
   const result: result = await prompts(createQuestions(options), { onCancel: () => console.log(`  ${red('✖ 取消操作')}`) })
   const isData = Object.keys(result).length
-  if (isData) execute(result)
+  const parmas = {
+    ...result,
+    git,
+    defaultProjectName
+  }
+  if (isData) execute(parmas)
 }

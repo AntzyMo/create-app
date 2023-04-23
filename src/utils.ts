@@ -1,8 +1,6 @@
 import { chdir } from 'node:process'
 import { existsSync, readdirSync } from 'node:fs'
 
-import type { PromptType } from 'prompts'
-
 export const cd = async (path: string) => {
   try {
     await chdir(path)
@@ -11,14 +9,6 @@ export const cd = async (path: string) => {
     console.log(err, 'cderr')
   }
 }
-
-/**
- * 是否用 npm 指令
- * @param value 选项的值
- * @param promptsType prompts 的类型
- * @returns
- */
-export const isUseNPM = (value: string, promptsType: PromptType) => value.includes('npm') ? null : promptsType
 
 /**
  * 检测是否有相同名称的文件夹

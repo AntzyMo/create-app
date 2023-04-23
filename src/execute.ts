@@ -3,7 +3,7 @@ import { join } from 'node:path'
 import { copySync, ensureDirSync, removeSync } from 'fs-extra'
 
 import { cd } from './utils'
-import type { result } from './type'
+import type { executeType } from './type'
 
 let execaCommandSync = null
 import('execa').then(execa => {
@@ -17,8 +17,14 @@ import('execa').then(execa => {
  */
 const templatePath = (...dir: string[]) => join(__dirname, '../template', ...dir)
 
-const useTemplate = async (options: result) => {
-  const { projectName, pickPresets, sameProjectDir } = options
+export default async (options: executeType) => {
+  let { git, projectName, defaultProjectName, pickPresets, sameProjectDir } = options
+
+  if (git) {
+    execaCommandSync(`git clone ${git}`, { stdout: 'inherit' })
+    projectName = /(\w+)\.git$/ig.exec(git)[1]
+  }
+  if (!projectName) projectName = defaultProjectName
 
   // 获取node进程的当前工作目录
   const cwd = process.cwd()
@@ -34,15 +40,5 @@ const useTemplate = async (options: result) => {
 
   await cd(currentDir)
   execaCommandSync('pnpm i', { stdout: 'inherit' })
-}
-
-export default (options: result) => {
-  const { pickPresets } = options
-
-  if (pickPresets?.includes('npm')) {
-    execaCommandSync('npm init vue@latest', { stdout: 'inherit' })
-  } else {
-    useTemplate(options)
-  }
 }
 
