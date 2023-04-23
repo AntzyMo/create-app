@@ -5,7 +5,7 @@
   "main": "/dist/index.cjs",
   "type": "module",
   "bin": {
-    "create-app": "dist/index.cjs"
+    "ca": "dist/index.cjs"
   },
   "files": [
     "dist",
